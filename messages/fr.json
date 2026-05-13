@@ -499,7 +499,8 @@
       "tags": "Tags",
       "webhooks": "Webhooks",
       "prompts": "Prompts",
-      "reports": "Signalements"
+      "reports": "Signalements",
+      "analytics": "Analytics"
     },
     "reports": {
       "title": "Gestion des Signalements",
@@ -913,7 +914,8 @@
     "todaysMostUpvoted": "Les Plus Votés Aujourd'hui",
     "latestPrompts": "Derniers Prompts",
     "recentlyUpdated": "Récemment Mis à Jour",
-    "mostContributed": "Les Plus Contribués"
+    "mostContributed": "Les Plus Contribués",
+    "trendingThisWeek": "Trending This Week"
   },
   "homepage": {
     "heroTitle": "La Plateforme Sociale Libre pour",

@@ -2,13 +2,14 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Users, FolderTree, Tags, FileText, Webhook, Flag } from "lucide-react";
+import { Users, FolderTree, Tags, FileText, Webhook, Flag, BarChart3 } from "lucide-react";
 
-const VALID_TABS = ["users", "categories", "tags", "webhooks", "prompts", "reports"] as const;
+const VALID_TABS = ["analytics", "users", "categories", "tags", "webhooks", "prompts", "reports"] as const;
 type TabValue = (typeof VALID_TABS)[number];
 
 interface AdminTabsProps {
   translations: {
+    analytics: string;
     users: string;
     categories: string;
     tags: string;
@@ -18,6 +19,7 @@ interface AdminTabsProps {
   };
   pendingReportsCount: number;
   children: {
+    analytics: React.ReactNode;
     users: React.ReactNode;
     categories: React.ReactNode;
     tags: React.ReactNode;
@@ -28,7 +30,7 @@ interface AdminTabsProps {
 }
 
 export function AdminTabs({ translations, pendingReportsCount, children }: AdminTabsProps) {
-  const [activeTab, setActiveTab] = useState<TabValue>("users");
+  const [activeTab, setActiveTab] = useState<TabValue>("analytics");
   const [mounted, setMounted] = useState(false);
 
   const updateTabFromHash = useCallback(() => {
@@ -60,6 +62,10 @@ export function AdminTabs({ translations, pendingReportsCount, children }: Admin
     <Tabs value={activeTab} onValueChange={handleTabChange} className="space-y-4">
       <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
         <TabsList className="w-max sm:w-auto">
+          <TabsTrigger value="analytics" className="gap-1.5 sm:gap-2 px-2.5 sm:px-3">
+            <BarChart3 className="h-4 w-4" />
+            <span className="hidden sm:inline">{translations.analytics}</span>
+          </TabsTrigger>
           <TabsTrigger value="users" className="gap-1.5 sm:gap-2 px-2.5 sm:px-3">
             <Users className="h-4 w-4" />
             <span className="hidden sm:inline">{translations.users}</span>
@@ -92,6 +98,7 @@ export function AdminTabs({ translations, pendingReportsCount, children }: Admin
         </TabsList>
       </div>
 
+      <TabsContent value="analytics">{children.analytics}</TabsContent>
       <TabsContent value="users">{children.users}</TabsContent>
       <TabsContent value="categories">{children.categories}</TabsContent>
       <TabsContent value="tags">{children.tags}</TabsContent>

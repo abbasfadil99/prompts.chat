@@ -499,7 +499,8 @@
       "tags": "タグ",
       "webhooks": "Webhook",
       "prompts": "プロンプト",
-      "reports": "報告"
+      "reports": "報告",
+      "analytics": "Analytics"
     },
     "reports": {
       "title": "報告管理",
@@ -913,7 +914,8 @@
     "todaysMostUpvoted": "今日最も投票された",
     "latestPrompts": "最新のプロンプト",
     "recentlyUpdated": "最近更新",
-    "mostContributed": "最も貢献されたプロンプト"
+    "mostContributed": "最も貢献されたプロンプト",
+    "trendingThisWeek": "Trending This Week"
   },
   "homepage": {
     "heroTitle": "AIプロンプトの自由な",

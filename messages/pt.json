@@ -499,7 +499,8 @@
       "tags": "Tags",
       "webhooks": "Webhooks",
       "prompts": "Prompts",
-      "reports": "Denúncias"
+      "reports": "Denúncias",
+      "analytics": "Analytics"
     },
     "reports": {
       "title": "Gestão de Denúncias",
@@ -913,7 +914,8 @@
     "todaysMostUpvoted": "Mais Votados de Hoje",
     "latestPrompts": "Prompts Recentes",
     "recentlyUpdated": "Atualizados Recentemente",
-    "mostContributed": "Mais Contribuídos"
+    "mostContributed": "Mais Contribuídos",
+    "trendingThisWeek": "Trending This Week"
   },
   "homepage": {
     "heroTitle": "A Plataforma Social Livre para",

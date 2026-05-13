@@ -499,7 +499,8 @@
       "tags": "Tags",
       "webhooks": "Webhooks",
       "prompts": "Prompts",
-      "reports": "Rapporten"
+      "reports": "Rapporten",
+      "analytics": "Analytics"
     },
     "reports": {
       "title": "Rapportenbeheer",
@@ -913,7 +914,8 @@
     "todaysMostUpvoted": "Meest gestemd vandaag",
     "latestPrompts": "Nieuwste prompts",
     "recentlyUpdated": "Recent bijgewerkt",
-    "mostContributed": "Meeste bijdragen"
+    "mostContributed": "Meeste bijdragen",
+    "trendingThisWeek": "Trending This Week"
   },
   "homepage": {
     "heroTitle": "Het gratis sociale platform voor",

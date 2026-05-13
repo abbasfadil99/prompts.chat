@@ -499,7 +499,8 @@
       "tags": "标签",
       "webhooks": "Webhooks",
       "prompts": "提示词",
-      "reports": "举报"
+      "reports": "举报",
+      "analytics": "Analytics"
     },
     "reports": {
       "title": "举报管理",
@@ -913,7 +914,8 @@
     "todaysMostUpvoted": "今日最热",
     "latestPrompts": "最新提示词",
     "recentlyUpdated": "最近更新",
-    "mostContributed": "贡献最多"
+    "mostContributed": "贡献最多",
+    "trendingThisWeek": "Trending This Week"
   },
   "homepage": {
     "heroTitle": "AI 提示词的自由",

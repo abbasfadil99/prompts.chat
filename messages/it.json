@@ -499,7 +499,8 @@
       "tags": "Tag",
       "webhooks": "Webhook",
       "prompts": "Prompt",
-      "reports": "Segnalazioni"
+      "reports": "Segnalazioni",
+      "analytics": "Analytics"
     },
     "reports": {
       "title": "Gestione Segnalazioni",
@@ -913,7 +914,8 @@
     "todaysMostUpvoted": "I Più Votati di Oggi",
     "latestPrompts": "Ultimi Prompt",
     "recentlyUpdated": "Aggiornati di Recente",
-    "mostContributed": "Con Più Contributi"
+    "mostContributed": "Con Più Contributi",
+    "trendingThisWeek": "Trending This Week"
   },
   "homepage": {
     "heroTitle": "La Piattaforma Social Libera per",

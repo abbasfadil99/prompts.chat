@@ -499,7 +499,8 @@
       "tags": "Tags",
       "webhooks": "Webhooks",
       "prompts": "Prompts",
-      "reports": "Meldungen"
+      "reports": "Meldungen",
+      "analytics": "Analytics"
     },
     "reports": {
       "title": "Meldungsverwaltung",
@@ -913,7 +914,8 @@
     "todaysMostUpvoted": "Heute am meisten bewertet",
     "latestPrompts": "Neueste Prompts",
     "recentlyUpdated": "Kürzlich aktualisiert",
-    "mostContributed": "Meiste Beiträge"
+    "mostContributed": "Meiste Beiträge",
+    "trendingThisWeek": "Trending This Week"
   },
   "homepage": {
     "heroTitle": "Die freie soziale Plattform für",

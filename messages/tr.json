@@ -499,7 +499,8 @@
       "tags": "Etiketler",
       "webhooks": "Webhooklar",
       "prompts": "Promptlar",
-      "reports": "Şikayetler"
+      "reports": "Şikayetler",
+      "analytics": "Analytics"
     },
     "reports": {
       "title": "Şikayet Yönetimi",
@@ -913,7 +914,8 @@
     "todaysMostUpvoted": "Bugün En Çok Oy Alanlar",
     "latestPrompts": "En Son Promptlar",
     "recentlyUpdated": "Son Güncellenenler",
-    "mostContributed": "En Çok Katkı Alanlar"
+    "mostContributed": "En Çok Katkı Alanlar",
+    "trendingThisWeek": "Trending This Week"
   },
   "homepage": {
     "heroTitle": "AI Promptları için Özgür",

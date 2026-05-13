@@ -43,11 +43,12 @@ export async function DiscoveryPrompts({ isHomepage = false }: DiscoveryPromptsP
     },
   };
 
-  // Get today's date at midnight for filtering today's votes
+  // Get date thresholds
   const today = new Date();
   today.setHours(0, 0, 0, 0);
+  const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
 
-  const [featuredPromptsRaw, todaysMostUpvotedRaw, latestPromptsRaw, recentlyUpdatedRaw, mostContributedRaw] = await Promise.all([
+  const [featuredPromptsRaw, todaysMostUpvotedRaw, trendingRaw, latestPromptsRaw, recentlyUpdatedRaw, mostContributedRaw] = await Promise.all([
     db.prompt.findMany({
       where: {
         isPrivate: false,
@@ -67,19 +68,35 @@ export async function DiscoveryPrompts({ isHomepage = false }: DiscoveryPromptsP
         deletedAt: null,
         votes: {
           some: {
-            createdAt: {
-              gte: today,
-            },
+            createdAt: { gte: today },
           },
         },
       },
-      orderBy: {
-        votes: {
-          _count: "desc",
-        },
-      },
+      orderBy: { votes: { _count: "desc" } },
       take: limit,
       include: promptInclude,
+    }),
+    // Trending this week — prompts with votes in the last 7 days
+    db.prompt.findMany({
+      where: {
+        isPrivate: false,
+        isUnlisted: false,
+        deletedAt: null,
+        votes: {
+          some: {
+            createdAt: { gte: sevenDaysAgo },
+          },
+        },
+      },
+      orderBy: { votes: { _count: "desc" } },
+      take: limit * 3, // fetch extra so we can re-rank with decay
+      include: {
+        ...promptInclude,
+        votes: {
+          where: { createdAt: { gte: sevenDaysAgo } },
+          select: { createdAt: true },
+        },
+      },
     }),
     db.prompt.findMany({
       where: {
@@ -124,6 +141,17 @@ export async function DiscoveryPrompts({ isHomepage = false }: DiscoveryPromptsP
     contributors: p.contributors,
   });
 
+  // Hacker News-style trending score: weekVotes / (ageHours + 2)^1.5
+  const trendingPrompts = trendingRaw
+    .map((p) => {
+      const ageHours = (Date.now() - new Date(p.createdAt).getTime()) / 3_600_000;
+      const weekVotes = (p as typeof p & { votes: { createdAt: Date }[] }).votes?.length ?? 0;
+      const score = (weekVotes * 3 + (p._count?.votes ?? 0) + (p.viewCount ?? 0) * 0.01) / Math.pow(ageHours + 2, 1.5);
+      return { ...p, voteCount: p._count?.votes ?? 0, contributorCount: p._count?.contributors ?? 0, contributors: p.contributors, _trendingScore: score };
+    })
+    .sort((a, b) => b._trendingScore - a._trendingScore)
+    .slice(0, limit);
+
   const featuredPrompts = featuredPromptsRaw.map(mapPrompt);
   const todaysMostUpvoted = todaysMostUpvotedRaw.map(mapPrompt);
   const latestPrompts = latestPromptsRaw.map(mapPrompt);
@@ -157,13 +185,38 @@ export async function DiscoveryPrompts({ isHomepage = false }: DiscoveryPromptsP
         </section>
       )}
 
+      {/* Trending This Week Section */}
+      {trendingPrompts.length > 0 && (
+        <section className={isHomepage ? "py-12 border-b" : "pb-8 mb-8 border-b"}>
+          <div className={isHomepage ? "container" : ""}>
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-2">
+                <Flame className="h-5 w-5 text-orange-500" />
+                <h2 className="text-xl font-semibold">{tDiscovery("trendingThisWeek")}</h2>
+              </div>
+              <Button variant="ghost" size="sm" asChild>
+                <Link href="/prompts" prefetch={false}>
+                  {t("browseAll")}
+                  <ArrowRight className="ml-1.5 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+            <Masonry columnCount={{ default: 1, md: 2, lg: 3 }} gap={16}>
+              {trendingPrompts.map((prompt) => (
+                <PromptCard key={prompt.id} prompt={prompt} />
+              ))}
+            </Masonry>
+          </div>
+        </section>
+      )}
+
       {/* Today's Most Upvoted Section */}
       {todaysMostUpvoted.length > 0 && (
         <section className={isHomepage ? "py-12 border-b" : "pb-8 mb-8 border-b"}>
           <div className={isHomepage ? "container" : ""}>
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-2">
-                <Flame className="h-5 w-5 text-orange-500" />
+                <Star className="h-5 w-5 text-yellow-500 fill-yellow-500" />
                 <h2 className="text-xl font-semibold">{tDiscovery("todaysMostUpvoted")}</h2>
               </div>
               <Button variant="ghost" size="sm" asChild>

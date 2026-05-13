@@ -499,7 +499,8 @@
       "tags": "Tags",
       "webhooks": "Webhooks",
       "prompts": "Prompts",
-      "reports": "Reports"
+      "reports": "Reports",
+      "analytics": "Analytics"
     },
     "reports": {
       "title": "Reports Management",
@@ -913,7 +914,8 @@
     "todaysMostUpvoted": "Today's Most Upvoted",
     "latestPrompts": "Latest Prompts",
     "recentlyUpdated": "Recently Updated",
-    "mostContributed": "Most Contributed"
+    "mostContributed": "Most Contributed",
+    "trendingThisWeek": "Trending This Week"
   },
   "homepage": {
     "heroTitle": "The Free Social Platform for",

@@ -499,7 +499,8 @@
       "tags": "Теги",
       "webhooks": "Вебхуки",
       "prompts": "Промпты",
-      "reports": "Жалобы"
+      "reports": "Жалобы",
+      "analytics": "Analytics"
     },
     "reports": {
       "title": "Управление жалобами",
@@ -913,7 +914,8 @@
     "todaysMostUpvoted": "Самые популярные за сегодня",
     "latestPrompts": "Новейшие промпты",
     "recentlyUpdated": "Недавно обновленные",
-    "mostContributed": "С наибольшим числом вкладов"
+    "mostContributed": "С наибольшим числом вкладов",
+    "trendingThisWeek": "Trending This Week"
   },
   "homepage": {
     "heroTitle": "Свободная социальная платформа для",

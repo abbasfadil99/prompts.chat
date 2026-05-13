@@ -499,7 +499,8 @@
       "tags": "Ετικέτες",
       "webhooks": "Webhooks",
       "prompts": "Prompts",
-      "reports": "Αναφορές"
+      "reports": "Αναφορές",
+      "analytics": "Analytics"
     },
     "reports": {
       "title": "Διαχείριση αναφορών",
@@ -913,7 +914,8 @@
     "todaysMostUpvoted": "Τα πιο ψηφισμένα σήμερα",
     "latestPrompts": "Τελευταία Prompts",
     "recentlyUpdated": "Πρόσφατα ενημερωμένα",
-    "mostContributed": "Περισσότερες συνεισφορές"
+    "mostContributed": "Περισσότερες συνεισφορές",
+    "trendingThisWeek": "Trending This Week"
   },
   "homepage": {
     "heroTitle": "Η ελεύθερη κοινωνική πλατφόρμα για",
