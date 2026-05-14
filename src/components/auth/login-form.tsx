@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useTranslations } from "next-intl";
@@ -89,7 +90,12 @@ export function LoginForm() {
           name="password"
           render={({ field }) => (
             <FormItem className="space-y-1">
-              <FormLabel className="text-xs">{t("password")}</FormLabel>
+              <div className="flex items-center justify-between">
+                <FormLabel className="text-xs">{t("password")}</FormLabel>
+                <Link href="/forgot-password" className="text-xs text-muted-foreground hover:text-foreground">
+                  Forgot password?
+                </Link>
+              </div>
               <FormControl>
                 <Input type="password" placeholder="••••••••" className="h-8 text-sm" disabled={isLoading} {...field} />
               </FormControl>

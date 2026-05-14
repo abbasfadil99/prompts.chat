@@ -500,7 +500,8 @@
       "webhooks": "Webhooks",
       "prompts": "提示词",
       "reports": "举报",
-      "analytics": "Analytics"
+      "analytics": "Analytics",
+      "settings": "Settings"
     },
     "reports": {
       "title": "举报管理",

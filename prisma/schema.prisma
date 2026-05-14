@@ -48,6 +48,9 @@ model User {
   notificationsActed    Notification[]         @relation("NotificationActor")
   collections           Collection[]
   userPromptExamples    UserPromptExample[]
+  passwordResetTokens   PasswordResetToken[]
+  followers             Follow[]               @relation("UserFollowing")
+  following             Follow[]               @relation("UserFollowers")
 
   @@map("users")
 }
@@ -88,6 +91,32 @@ model VerificationToken {
 
   @@unique([identifier, token])
   @@map("verification_tokens")
+}
+
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  expires   DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("password_reset_tokens")
+}
+
+model Follow {
+  followerId  String
+  followingId String
+  createdAt   DateTime @default(now())
+  follower    User     @relation("UserFollowers", fields: [followerId], references: [id], onDelete: Cascade)
+  following   User     @relation("UserFollowing", fields: [followingId], references: [id], onDelete: Cascade)
+
+  @@id([followerId, followingId])
+  @@index([followerId])
+  @@index([followingId])
+  @@map("follows")
 }
 
 model Prompt {
@@ -459,4 +488,12 @@ enum DelistReason {
   NOT_LLM_INSTRUCTION
   MANUAL
   UNUSUAL_ACTIVITY
+}
+
+model SiteSettings {
+  key       String   @id
+  value     String
+  updatedAt DateTime @updatedAt
+
+  @@map("site_settings")
 }

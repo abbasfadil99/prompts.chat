@@ -41,7 +41,7 @@ export function NotificationBell() {
   const { data: session } = useSession();
   const t = useTranslations("notifications");
   const locale = useLocale();
-  const [notifications, setNotifications] = useState<Notifications>({ 
+  const [notifications, setNotifications] = useState<Notifications>({
     pendingChangeRequests: 0,
     unreadComments: 0,
     commentNotifications: [],
@@ -54,21 +54,45 @@ export function NotificationBell() {
       return;
     }
 
-    const fetchNotifications = async () => {
-      try {
-        const response = await fetch("/api/user/notifications");
-        if (response.ok) {
-          const data = await response.json();
-          setNotifications(data);
+    let es: EventSource | null = null;
+    let retryTimer: ReturnType<typeof setTimeout> | null = null;
+
+    const connect = () => {
+      es = new EventSource("/api/notifications/stream");
+
+      es.onmessage = (event) => {
+        try {
+          const data = JSON.parse(event.data);
+          if (data.type === "close") {
+            // Server asked us to reconnect
+            es?.close();
+            retryTimer = setTimeout(connect, 1000);
+            return;
+          }
+          setNotifications({
+            pendingChangeRequests: data.pendingChangeRequests ?? 0,
+            unreadComments: data.unreadComments ?? 0,
+            commentNotifications: data.commentNotifications ?? [],
+          });
+          setIsLoading(false);
+        } catch {
+          // ignore parse errors
         }
-      } catch (error) {
-        console.error("Failed to fetch notifications:", error);
-      } finally {
-        setIsLoading(false);
-      }
+      };
+
+      es.onerror = () => {
+        es?.close();
+        // Retry after 5 s on error
+        retryTimer = setTimeout(connect, 5000);
+      };
     };
 
-    fetchNotifications();
+    connect();
+
+    return () => {
+      es?.close();
+      if (retryTimer) clearTimeout(retryTimer);
+    };
   }, [session?.user]);
 
   if (!session?.user || isLoading) {

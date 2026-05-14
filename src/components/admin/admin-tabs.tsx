@@ -2,9 +2,9 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Users, FolderTree, Tags, FileText, Webhook, Flag, BarChart3 } from "lucide-react";
+import { Users, FolderTree, Tags, FileText, Webhook, Flag, BarChart3, Settings } from "lucide-react";
 
-const VALID_TABS = ["analytics", "users", "categories", "tags", "webhooks", "prompts", "reports"] as const;
+const VALID_TABS = ["analytics", "users", "categories", "tags", "webhooks", "prompts", "reports", "settings"] as const;
 type TabValue = (typeof VALID_TABS)[number];
 
 interface AdminTabsProps {
@@ -16,6 +16,7 @@ interface AdminTabsProps {
     webhooks: string;
     prompts: string;
     reports: string;
+    settings: string;
   };
   pendingReportsCount: number;
   children: {
@@ -26,6 +27,7 @@ interface AdminTabsProps {
     webhooks: React.ReactNode;
     prompts: React.ReactNode;
     reports: React.ReactNode;
+    settings: React.ReactNode;
   };
 }
 
@@ -95,6 +97,10 @@ export function AdminTabs({ translations, pendingReportsCount, children }: Admin
               </span>
             )}
           </TabsTrigger>
+          <TabsTrigger value="settings" className="gap-1.5 sm:gap-2 px-2.5 sm:px-3">
+            <Settings className="h-4 w-4" />
+            <span className="hidden sm:inline">{translations.settings}</span>
+          </TabsTrigger>
         </TabsList>
       </div>
 
@@ -105,6 +111,7 @@ export function AdminTabs({ translations, pendingReportsCount, children }: Admin
       <TabsContent value="webhooks">{children.webhooks}</TabsContent>
       <TabsContent value="prompts">{children.prompts}</TabsContent>
       <TabsContent value="reports">{children.reports}</TabsContent>
+      <TabsContent value="settings">{children.settings}</TabsContent>
     </Tabs>
   );
 }

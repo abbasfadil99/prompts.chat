@@ -500,7 +500,8 @@
       "webhooks": "Webhooks",
       "prompts": "Promptlar",
       "reports": "Hesabatlar",
-      "analytics": "Analytics"
+      "analytics": "Analytics",
+      "settings": "Settings"
     },
     "reports": {
       "title": "Hesabat İdarəetməsi",

@@ -500,7 +500,8 @@
       "webhooks": "Webhooks",
       "prompts": "Prompts",
       "reports": "Reportes",
-      "analytics": "Analytics"
+      "analytics": "Analytics",
+      "settings": "Settings"
     },
     "reports": {
       "title": "Gestión de Reportes",

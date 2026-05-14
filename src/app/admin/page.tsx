@@ -14,6 +14,7 @@ import { WebhooksTable } from "@/components/admin/webhooks-table";
 import { PromptsManagement } from "@/components/admin/prompts-management";
 import { ReportsTable } from "@/components/admin/reports-table";
 import { AnalyticsDashboard } from "@/components/admin/analytics-dashboard";
+import { SiteSettingsPanel } from "@/components/admin/site-settings";
 import { isAISearchEnabled } from "@/lib/ai/embeddings";
 
 export const metadata: Metadata = {
@@ -188,6 +189,7 @@ export default async function AdminPage() {
           webhooks: t("tabs.webhooks"),
           prompts: t("tabs.prompts"),
           reports: t("tabs.reports"),
+          settings: t("tabs.settings"),
         }}
         pendingReportsCount={reports.filter(r => r.status === "PENDING").length}
         children={{
@@ -206,6 +208,7 @@ export default async function AdminPage() {
             />
           ),
           reports: <ReportsTable reports={reports} />,
+          settings: <SiteSettingsPanel />,
         }}
       />
     </div>

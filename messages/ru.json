@@ -500,7 +500,8 @@
       "webhooks": "Вебхуки",
       "prompts": "Промпты",
       "reports": "Жалобы",
-      "analytics": "Analytics"
+      "analytics": "Analytics",
+      "settings": "Settings"
     },
     "reports": {
       "title": "Управление жалобами",

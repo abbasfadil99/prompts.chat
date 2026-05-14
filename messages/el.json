@@ -500,7 +500,8 @@
       "webhooks": "Webhooks",
       "prompts": "Prompts",
       "reports": "Αναφορές",
-      "analytics": "Analytics"
+      "analytics": "Analytics",
+      "settings": "Settings"
     },
     "reports": {
       "title": "Διαχείριση αναφορών",

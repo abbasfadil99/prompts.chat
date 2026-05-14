@@ -19,6 +19,7 @@ import { McpServerPopup } from "@/components/mcp/mcp-server-popup";
 import { PrivatePromptsNote } from "@/components/prompts/private-prompts-note";
 import { ActivityChartWrapper } from "@/components/user/activity-chart-wrapper";
 import { ProfileLinks, type CustomLink } from "@/components/user/profile-links";
+import { FollowButton } from "@/components/user/follow-button";
 
 interface UserProfilePageProps {
   params: Promise<{ username: string }>;
@@ -491,13 +492,15 @@ export default async function UserProfilePage({ params, searchParams }: UserProf
           {/* Actions - desktop only */}
           <div className="hidden md:flex items-center gap-2 shrink-0">
             {config.features.mcp !== false && <McpServerPopup initialUsers={[user.username]} showOfficialBranding={!config.homepage?.useCloneBranding} />}
-            {isOwner && (
+            {isOwner ? (
               <Button variant="outline" size="sm" asChild>
                 <Link href="/settings">
                   <Settings className="h-4 w-4 mr-1.5" />
                   {t("editProfile")}
                 </Link>
               </Button>
+            ) : (
+              <FollowButton username={user.username} />
             )}
           </div>
         </div>
@@ -505,13 +508,15 @@ export default async function UserProfilePage({ params, searchParams }: UserProf
         {/* Actions - mobile only */}
         <div className="md:hidden flex gap-2">
           {config.features.mcp !== false && <McpServerPopup initialUsers={[user.username]} showOfficialBranding={!config.homepage?.useCloneBranding} />}
-          {isOwner && (
+          {isOwner ? (
             <Button variant="outline" size="sm" asChild className="flex-1">
               <Link href="/settings">
                 <Settings className="h-4 w-4 mr-1.5" />
                 {t("editProfile")}
               </Link>
             </Button>
+          ) : (
+            <FollowButton username={user.username} />
           )}
         </div>
 
