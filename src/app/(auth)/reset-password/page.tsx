@@ -26,7 +26,7 @@ type FormData = z.infer<typeof schema>;
 export default function ResetPasswordPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const token = searchParams.get("token");
+  const token = searchParams?.get("token") ?? null;
 
   const [tokenValid, setTokenValid] = useState<boolean | null>(null);
   const [done, setDone] = useState(false);
