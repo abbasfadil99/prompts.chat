@@ -39,7 +39,7 @@ const playfairDisplay = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXTAUTH_URL || "http://localhost:3000"),
+  metadataBase: new URL((process.env.NEXTAUTH_URL || "http://localhost:3000").trim().replace(/^<|>$/g, "")),
   title: {
     default: "prompts.chat - AI Prompts Community",
     template: "%s | prompts.chat",
