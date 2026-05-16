@@ -142,6 +142,7 @@ async function buildAuthConfig() {
   return {
     adapter: CustomPrismaAdapter(),
     providers: authProviders,
+    trustHost: true,
     session: {
       strategy: "jwt" as const,
     },
