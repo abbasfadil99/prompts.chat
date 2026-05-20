@@ -215,6 +215,11 @@ async function buildAuthConfig() {
   };
 }
 
+// Sanitize NEXTAUTH_URL before NextAuth reads it via setEnvDefaults()
+if (process.env.NEXTAUTH_URL) {
+  process.env.NEXTAUTH_URL = process.env.NEXTAUTH_URL.trim().replace(/^<|>$/g, "");
+}
+
 // Export auth handlers
 const authConfig = await buildAuthConfig();
 
