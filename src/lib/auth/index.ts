@@ -215,9 +215,16 @@ async function buildAuthConfig() {
   };
 }
 
-// Sanitize NEXTAUTH_URL before NextAuth reads it via setEnvDefaults()
+// Sanitize NEXTAUTH_URL / AUTH_URL before NextAuth reads them
 if (process.env.NEXTAUTH_URL) {
   process.env.NEXTAUTH_URL = process.env.NEXTAUTH_URL.trim().replace(/^<|>$/g, "");
+}
+if (process.env.AUTH_URL) {
+  process.env.AUTH_URL = process.env.AUTH_URL.trim().replace(/^<|>$/g, "");
+}
+// NextAuth v5 prefers AUTH_URL; map NEXTAUTH_URL as fallback
+if (!process.env.AUTH_URL && process.env.NEXTAUTH_URL) {
+  process.env.AUTH_URL = process.env.NEXTAUTH_URL;
 }
 
 // Export auth handlers

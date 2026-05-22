@@ -21,7 +21,12 @@ function getOrdinalSuffix(n: number): string {
 export default async function HomePage() {
   const tHomepage = await getTranslations("homepage");
   const tNav = await getTranslations("nav");
-  const session = await auth();
+  let session = null;
+  try {
+    session = await auth();
+  } catch {
+    // auth() unavailable in this context — treat as logged out
+  }
   const config = await getConfig();
   
   const isOAuth = config.auth.provider !== "credentials";
