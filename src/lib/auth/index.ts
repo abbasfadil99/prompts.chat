@@ -215,17 +215,17 @@ async function buildAuthConfig() {
   };
 }
 
-// Sanitize NEXTAUTH_URL / AUTH_URL before NextAuth reads them
+// Sanitize env vars that may have been pasted with angle-bracket formatting
 if (process.env.NEXTAUTH_URL) {
   process.env.NEXTAUTH_URL = process.env.NEXTAUTH_URL.trim().replace(/^<|>$/g, "");
 }
 if (process.env.AUTH_URL) {
   process.env.AUTH_URL = process.env.AUTH_URL.trim().replace(/^<|>$/g, "");
 }
-// NextAuth v5 prefers AUTH_URL; map NEXTAUTH_URL as fallback
-if (!process.env.AUTH_URL && process.env.NEXTAUTH_URL) {
-  process.env.AUTH_URL = process.env.NEXTAUTH_URL;
-}
+// AUTH_TRUST_HOST tells NextAuth v5 to derive the callback URL from the
+// incoming request host (X-Forwarded-Host), not from AUTH_URL/NEXTAUTH_URL.
+// This ensures login works correctly on both preview and production deployments.
+process.env.AUTH_TRUST_HOST = "1";
 
 // Export auth handlers
 const authConfig = await buildAuthConfig();
