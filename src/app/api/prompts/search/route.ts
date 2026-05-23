@@ -7,6 +7,7 @@ export async function GET(request: NextRequest) {
   const query = searchParams.get("q") || "";
   const limit = Math.min(parseInt(searchParams.get("limit") || "10"), 50);
   const ownerOnly = searchParams.get("ownerOnly") === "true";
+  const searchIn = searchParams.get("searchIn") || "title"; // "title" | "all"
 
   if (query.length < 2) {
     return NextResponse.json({ prompts: [] });
@@ -15,38 +16,58 @@ export async function GET(request: NextRequest) {
   const session = await auth();
 
   try {
-    // Handle comma-separated keywords
-    const keywords = query.split(",").map(k => k.trim()).filter(Boolean);
-    const titleConditions = keywords.length > 1
-      ? keywords.map(keyword => ({ title: { contains: keyword, mode: "insensitive" as const } }))
-      : [{ title: { contains: query, mode: "insensitive" as const } }];
+    // Handle comma-separated keywords for title-only search
+    const keywords = query.split(",").map((k) => k.trim()).filter(Boolean);
+    const multiKeyword = keywords.length > 1;
+
+    // Build per-field match conditions
+    const buildFieldConditions = (field: "title" | "description" | "content") =>
+      multiKeyword
+        ? keywords.map((kw) => ({ [field]: { contains: kw, mode: "insensitive" as const } }))
+        : [{ [field]: { contains: query, mode: "insensitive" as const } }];
+
+    const titleConditions = buildFieldConditions("title");
+
+    // When searching across all fields combine title / description / content
+    const fullTextConditions =
+      searchIn === "all"
+        ? [
+            ...titleConditions,
+            ...buildFieldConditions("description"),
+            ...buildFieldConditions("content"),
+          ]
+        : titleConditions;
+
+    const visibilityFilter =
+      ownerOnly && session?.user
+        ? { authorId: session.user.id }
+        : {
+            OR: [
+              { isPrivate: false },
+              ...(session?.user ? [{ authorId: session.user.id }] : []),
+            ],
+          };
 
     const prompts = await db.prompt.findMany({
       where: {
         deletedAt: null,
         isUnlisted: false,
         AND: [
-          // Visibility filter
-          ownerOnly && session?.user
-            ? { authorId: session.user.id }
-            : {
-                OR: [
-                  { isPrivate: false },
-                  ...(session?.user ? [{ authorId: session.user.id }] : []),
-                ],
-              },
-          // Search filter
-          { OR: titleConditions },
+          visibilityFilter,
+          { OR: fullTextConditions },
         ],
       },
       select: {
         id: true,
         title: true,
         slug: true,
+        description: true,
+        type: true,
         author: {
-          select: {
-            username: true,
-          },
+          select: { username: true },
+        },
+        _count: {
+          select: { votes: true },
         },
       },
       take: limit,
@@ -59,9 +80,6 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ prompts });
   } catch (error) {
     console.error("Search failed:", error);
-    return NextResponse.json(
-      { error: "Search failed" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Search failed" }, { status: 500 });
   }
 }

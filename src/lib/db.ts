@@ -11,7 +11,7 @@ const prismaClientSingleton = () => {
       process.env.NODE_ENV === "development"
         ? ["query", "error", "warn"]
         : ["error"],
-    datasourceUrl: process.env.DATABASE_URL,
+    datasourceUrl: (process.env.DATABASE_URL ?? "").trim().replace(/^<|>$/g, ""),
   });
 };
 

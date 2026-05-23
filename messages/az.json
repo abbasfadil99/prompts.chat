@@ -499,7 +499,9 @@
       "tags": "Etiketlər",
       "webhooks": "Webhooks",
       "prompts": "Promptlar",
-      "reports": "Hesabatlar"
+      "reports": "Hesabatlar",
+      "analytics": "Analytics",
+      "settings": "Settings"
     },
     "reports": {
       "title": "Hesabat İdarəetməsi",
@@ -913,7 +915,8 @@
     "todaysMostUpvoted": "Bu Günün Ən Çox Bəyənilənləri",
     "latestPrompts": "Ən Son Promptlar",
     "recentlyUpdated": "Son Yenilənənlər",
-    "mostContributed": "Ən Çox Töhfə Verilənlər"
+    "mostContributed": "Ən Çox Töhfə Verilənlər",
+    "trendingThisWeek": "Trending This Week"
   },
   "homepage": {
     "heroTitle": "AI Promptları üçün Azad",

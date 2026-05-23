@@ -142,6 +142,7 @@ async function buildAuthConfig() {
   return {
     adapter: CustomPrismaAdapter(),
     providers: authProviders,
+    trustHost: true,
     session: {
       strategy: "jwt" as const,
     },
@@ -213,6 +214,18 @@ async function buildAuthConfig() {
     },
   };
 }
+
+// Sanitize env vars that may have been pasted with angle-bracket formatting
+if (process.env.NEXTAUTH_URL) {
+  process.env.NEXTAUTH_URL = process.env.NEXTAUTH_URL.trim().replace(/^<|>$/g, "");
+}
+if (process.env.AUTH_URL) {
+  process.env.AUTH_URL = process.env.AUTH_URL.trim().replace(/^<|>$/g, "");
+}
+// AUTH_TRUST_HOST tells NextAuth v5 to derive the callback URL from the
+// incoming request host (X-Forwarded-Host), not from AUTH_URL/NEXTAUTH_URL.
+// This ensures login works correctly on both preview and production deployments.
+process.env.AUTH_TRUST_HOST = "1";
 
 // Export auth handlers
 const authConfig = await buildAuthConfig();

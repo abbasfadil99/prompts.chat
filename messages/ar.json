@@ -499,7 +499,9 @@
       "tags": "الوسوم",
       "webhooks": "Webhooks",
       "prompts": "الأوامر",
-      "reports": "البلاغات"
+      "reports": "البلاغات",
+      "analytics": "Analytics",
+      "settings": "Settings"
     },
     "reports": {
       "title": "إدارة البلاغات",
@@ -913,7 +915,8 @@
     "todaysMostUpvoted": "الأكثر تصويتاً اليوم",
     "latestPrompts": "أحدث الأوامر",
     "recentlyUpdated": "المحدثة مؤخراً",
-    "mostContributed": "الأكثر مساهمة"
+    "mostContributed": "الأكثر مساهمة",
+    "trendingThisWeek": "Trending This Week"
   },
   "homepage": {
     "heroTitle": "المنصة الاجتماعية الحرة لـ",

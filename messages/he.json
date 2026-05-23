@@ -499,7 +499,9 @@
       "tags": "תגיות",
       "webhooks": "Webhooks",
       "prompts": "פרומפטים",
-      "reports": "דיווחים"
+      "reports": "דיווחים",
+      "analytics": "Analytics",
+      "settings": "Settings"
     },
     "reports": {
       "title": "ניהול דיווחים",
@@ -913,7 +915,8 @@
     "todaysMostUpvoted": "המדורגים ביותר היום",
     "latestPrompts": "פרומפטים אחרונים",
     "recentlyUpdated": "עודכנו לאחרונה",
-    "mostContributed": "עם הכי הרבה תרומות"
+    "mostContributed": "עם הכי הרבה תרומות",
+    "trendingThisWeek": "Trending This Week"
   },
   "homepage": {
     "heroTitle": "הפלטפורמה החברתית החופשית ל",

@@ -499,7 +499,9 @@
       "tags": "Etiquetas",
       "webhooks": "Webhooks",
       "prompts": "Prompts",
-      "reports": "Reportes"
+      "reports": "Reportes",
+      "analytics": "Analytics",
+      "settings": "Settings"
     },
     "reports": {
       "title": "Gestión de Reportes",
@@ -913,7 +915,8 @@
     "todaysMostUpvoted": "Más Votados Hoy",
     "latestPrompts": "Últimos Prompts",
     "recentlyUpdated": "Actualizados Recientemente",
-    "mostContributed": "Más Contribuidos"
+    "mostContributed": "Más Contribuidos",
+    "trendingThisWeek": "Trending This Week"
   },
   "homepage": {
     "heroTitle": "La Plataforma Social Libre para",

@@ -499,7 +499,9 @@
       "tags": "برچسب‌ها",
       "webhooks": "وب‌هوک‌ها",
       "prompts": "پرامپت‌ها",
-      "reports": "گزارش‌ها"
+      "reports": "گزارش‌ها",
+      "analytics": "Analytics",
+      "settings": "Settings"
     },
     "reports": {
       "title": "مدیریت گزارش‌ها",
@@ -913,7 +915,8 @@
     "todaysMostUpvoted": "پرلایک‌ترین‌های امروز",
     "latestPrompts": "جدیدترین پرامپت‌ها",
     "recentlyUpdated": "اخیراً به‌روز شده",
-    "mostContributed": "بیشترین مشارکت"
+    "mostContributed": "بیشترین مشارکت",
+    "trendingThisWeek": "Trending This Week"
   },
   "homepage": {
     "heroTitle": "پلتفرم اجتماعی آزاد برای",

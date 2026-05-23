@@ -13,6 +13,8 @@ import { TagsTable } from "@/components/admin/tags-table";
 import { WebhooksTable } from "@/components/admin/webhooks-table";
 import { PromptsManagement } from "@/components/admin/prompts-management";
 import { ReportsTable } from "@/components/admin/reports-table";
+import { AnalyticsDashboard } from "@/components/admin/analytics-dashboard";
+import { SiteSettingsPanel } from "@/components/admin/site-settings";
 import { isAISearchEnabled } from "@/lib/ai/embeddings";
 
 export const metadata: Metadata = {
@@ -180,22 +182,25 @@ export default async function AdminPage() {
       {/* Management Tabs */}
       <AdminTabs
         translations={{
+          analytics: t("tabs.analytics"),
           users: t("tabs.users"),
           categories: t("tabs.categories"),
           tags: t("tabs.tags"),
           webhooks: t("tabs.webhooks"),
           prompts: t("tabs.prompts"),
           reports: t("tabs.reports"),
+          settings: t("tabs.settings"),
         }}
         pendingReportsCount={reports.filter(r => r.status === "PENDING").length}
         children={{
+          analytics: <AnalyticsDashboard />,
           users: <UsersTable />,
           categories: <CategoriesTable categories={categories} />,
           tags: <TagsTable tags={tags} />,
           webhooks: <WebhooksTable webhooks={webhooks} />,
           prompts: (
-            <PromptsManagement 
-              aiSearchEnabled={aiSearchEnabled} 
+            <PromptsManagement
+              aiSearchEnabled={aiSearchEnabled}
               promptsWithoutEmbeddings={promptsWithoutEmbeddings}
               totalPublicPrompts={totalPublicPrompts}
               promptsWithoutSlugs={promptsWithoutSlugs}
@@ -203,6 +208,7 @@ export default async function AdminPage() {
             />
           ),
           reports: <ReportsTable reports={reports} />,
+          settings: <SiteSettingsPanel />,
         }}
       />
     </div>

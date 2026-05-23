@@ -499,7 +499,9 @@
       "tags": "태그",
       "webhooks": "웹훅",
       "prompts": "프롬프트",
-      "reports": "신고"
+      "reports": "신고",
+      "analytics": "Analytics",
+      "settings": "Settings"
     },
     "reports": {
       "title": "신고 관리",
@@ -913,7 +915,8 @@
     "todaysMostUpvoted": "오늘의 인기",
     "latestPrompts": "최신 프롬프트",
     "recentlyUpdated": "최근 업데이트",
-    "mostContributed": "가장 많은 기여"
+    "mostContributed": "가장 많은 기여",
+    "trendingThisWeek": "Trending This Week"
   },
   "homepage": {
     "heroTitle": "자유로운 소셜 플랫폼",
